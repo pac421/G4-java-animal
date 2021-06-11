@@ -1,4 +1,4 @@
-package model.employees;
+package employees;
 
 public class Employee {
     enum Gender {

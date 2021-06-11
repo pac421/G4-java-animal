@@ -1,4 +1,4 @@
-package model.pens;
+package pens;
 
 public class Aquarium extends Pen {
     private double depth;

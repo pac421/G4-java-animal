@@ -1,4 +1,4 @@
-package model.animals;
+package animals;
 
 public class Whale extends Mammal implements Swimmer {
     @Override

@@ -1,4 +1,4 @@
-package model.animals;
+package animals;
 
 public class Penguin extends Oviparous implements Swimmer, Flyer {
     @Override

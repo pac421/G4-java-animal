@@ -1,8 +1,8 @@
-package model.pens;
+package pens;
 
-import model.animals.Animal;
+import animals.*;
 
-import java.util.ArrayList;
+import java.util.TreeSet;
 
 public class Pen {
     enum Cleanliness {
@@ -12,7 +12,7 @@ public class Pen {
     protected double area;
     protected int maxAnimalsNumber;
     protected int animalsNumber;
-    ArrayList<Animal> animals;
+    TreeSet<? extends Animal> animals;
     Cleanliness cleanliness;
 
     public void addAnimal() {

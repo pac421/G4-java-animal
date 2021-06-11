@@ -1,4 +1,4 @@
-package model.animals;
+package animals;
 
 public class Wolf extends Mammal implements Walker {
     @Override

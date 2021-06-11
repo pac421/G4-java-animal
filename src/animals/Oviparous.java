@@ -1,4 +1,4 @@
-package model.animals;
+package animals;
 
 public class Oviparous extends Animal {
     protected int incubationDelay;

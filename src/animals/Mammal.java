@@ -1,4 +1,4 @@
-package model.animals;
+package animals;
 
 public class Mammal extends Animal{
     protected int gestationDelay;
