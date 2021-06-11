@@ -42,7 +42,7 @@ public class Employee {
     }
 
     public void lookAtPen(Pen pen) {
-        System.out.println(pen.toString());
+        pen.showDetails();
     }
 
     public void cleanPen(Pen pen) {
@@ -55,5 +55,10 @@ public class Employee {
 
     public void moveAnimal(Animal animal, Pen outComingPen, Pen inComingPen) {
 
+    }
+
+    @Override
+    public String toString() {
+        return this.name+(this.gender == Gender.M ? " un homme" : " une femme")+" de "+this.age+" ans";
     }
 }

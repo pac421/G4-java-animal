@@ -1,7 +1,7 @@
 package pens;
 
 import animals.*;
-import java.util.TreeSet;
+import java.util.ArrayList;
 
 public class Pen {
     protected enum State {
@@ -11,7 +11,7 @@ public class Pen {
     protected double area;
     protected int maxAnimalsNumber;
     protected int animalsNumber;
-    TreeSet<? extends Animal> animals;
+    ArrayList<? extends Animal> animals;
     State cleanliness;
 
     public String getName() {
@@ -46,14 +46,6 @@ public class Pen {
         this.animalsNumber = animalsNumber;
     }
 
-    public TreeSet<? extends Animal> getAnimals() {
-        return animals;
-    }
-
-    public void setAnimals(TreeSet<? extends Animal> animals) {
-        this.animals = animals;
-    }
-
     public State getCleanliness() {
         return cleanliness;
     }
@@ -62,16 +54,31 @@ public class Pen {
         this.cleanliness = cleanliness;
     }
 
-    public void addAnimal() {
+    public <T extends Animal> void addAnimal(ArrayList<T> animals, T animal) {
+        if(this.animalsNumber < this.maxAnimalsNumber){
+            animals.add(animal);
+            this.animalsNumber++;
+            System.out.println("L'animal aime son nouvel enclos !");
+        } else
+            System.out.println("La cage est déjà pleine :(");
 
     }
 
-    public void removeAnimal() {
+    public <T extends Animal> void removeAnimal(ArrayList<T> animals, T animal) {
+        if(animals.contains(animal)){
+            animals.remove(animal);
+            this.animalsNumber--;
+            System.out.println("L'animal a bien été retiré !");
+        } else
+            System.out.println("L'animal n'est pas dans cette cage :(");
 
     }
 
     public void feedAnimals() {
-
+        if(this.animalsNumber > 0)
+            this.animals.forEach(Animal::feed);
+        else
+            System.out.println("La cage est vide.");
     }
 
     public void clean() {
@@ -83,7 +90,10 @@ public class Pen {
         System.out.println("L'enclos est propre !");
     }
 
-    public String toString() {
-        return name;
+    public void showDetails() {
+        System.out.println("Enclos");
+        System.out.println(this.name+", "+this.area+"m2, "+this.animalsNumber+"/"+this.maxAnimalsNumber+", État:"+this.cleanliness);
+        System.out.println("Animaux :");
+        this.animals.forEach(Animal::showDetails);
     }
 }

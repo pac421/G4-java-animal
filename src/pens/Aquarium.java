@@ -1,5 +1,9 @@
 package pens;
 
+import animals.Animal;
+import animals.movements.Swimmer;
+import java.util.ArrayList;
+
 public class Aquarium extends Pen {
     private State depth;
     private State salinity;
@@ -24,6 +28,18 @@ public class Aquarium extends Pen {
         }
 
         System.out.println("Le bassin est propre !");
+    }
+
+    public <T extends Animal> void addAnimal(ArrayList<T> animals, T animal) {
+        if(this.animalsNumber < this.maxAnimalsNumber){
+            if (animal instanceof Swimmer){
+                animals.add(animal);
+                System.out.println("L'animal aime son nouveau bassin !");
+            } else
+                System.out.println("Ce n'est pas un animal marin -_-'");
+        } else
+            System.out.println("La cage est déjà pleine :(");
+
     }
 }
 

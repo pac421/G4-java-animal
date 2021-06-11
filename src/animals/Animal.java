@@ -12,8 +12,7 @@ public abstract class Animal {
     protected String name;
     protected Gender gender;
     protected double weight, size;
-    protected int age;
-    protected int hunger, health;
+    protected int age, hunger, health;
     protected boolean isAsleep;
 
     public Animal(String name, Gender gender, double weight, double size, int age) {
@@ -91,7 +90,7 @@ public abstract class Animal {
         isAsleep = asleep;
     }
 
-    public void eat() {
+    public void feed() {
         if (this.isAsleep)
             System.out.println("L'animal dort.");
         else {
@@ -121,5 +120,9 @@ public abstract class Animal {
             System.out.println("L'animal s'endort.");
         else
             System.out.println("L'animal se réveille.");
+    }
+
+    public void showDetails(){
+        System.out.println(this.name+", "+this.gender+", "+this.weight+"kg, "+this.size+"cm, "+this.age+"ans, faim:"+this.hunger+", santé:"+this.health+", Endormi:"+this.isAsleep);
     }
 }
