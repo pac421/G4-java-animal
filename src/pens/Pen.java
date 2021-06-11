@@ -5,7 +5,7 @@ import animals.*;
 import java.util.TreeSet;
 
 public class Pen {
-    enum Cleanliness {
+    protected enum State {
         Bad, Correct, Good
     }
     protected String name;
@@ -13,7 +13,7 @@ public class Pen {
     protected int maxAnimalsNumber;
     protected int animalsNumber;
     TreeSet<? extends Animal> animals;
-    Cleanliness cleanliness;
+    State cleanliness;
 
     public void addAnimal() {
 
@@ -28,7 +28,7 @@ public class Pen {
     }
 
     public void clean() {
-        this.cleanliness = Cleanliness.Good;
+        this.cleanliness = State.Good;
         System.out.println("Nettoyage de le l'enclos..");
         System.out.println("L'enclos est désormais propre !");
     }

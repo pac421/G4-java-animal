@@ -1,11 +1,11 @@
 package pens;
 
 public class Aquarium extends Pen {
-    private double depth;
-    private double salinity;
+    private State depth;
+    private State salinity;
 
     public void clean() {
-        this.cleanliness = Cleanliness.Good;
+        this.cleanliness = State.Good;
         System.out.println("Nettoyage du bassin..");
         System.out.println("Vérification de la profondeur du bassin..");
         System.out.println("Remplissage de l'eau manquante..");
