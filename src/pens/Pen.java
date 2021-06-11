@@ -28,7 +28,9 @@ public class Pen {
     }
 
     public void clean() {
-
+        this.cleanliness = Cleanliness.Good;
+        System.out.println("Nettoyage de le l'enclos..");
+        System.out.println("L'enclos est désormais propre !");
     }
 
     public String toString() {
