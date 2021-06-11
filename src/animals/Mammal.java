@@ -3,14 +3,6 @@ package animals;
 public abstract class Mammal extends Animal{
     protected int gestationDelay;
 
-    /**
-     * @param name
-     * @param gender
-     * @param weight
-     * @param size
-     * @param age
-     * @param gestationDelay
-     */
     public Mammal(String name, Gender gender, double weight, double size, int age, int gestationDelay) {
         super(name, gender, weight, size, age);
         this.gestationDelay = gestationDelay;
@@ -24,10 +16,10 @@ public abstract class Mammal extends Animal{
         this.gestationDelay = gestationDelay;
     }
 
-    public String calve() {
-        if (gender == Gender.F) {
-            return "Calve";
-        }
-        return "Cannot calve !";
+    public void calve() {
+        if(this.gender == Gender.F){
+            System.out.println("L'animal met bas..");
+        } else
+            System.out.println("Cet animal est un mâle -_-'");
     }
 }

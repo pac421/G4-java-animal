@@ -41,16 +41,16 @@ public class Employee {
         this.age = age;
     }
 
-    public String lookAtPen(Pen pen) {
-        return "Enclos examiné";
+    public void lookAtPen(Pen pen) {
+        System.out.println(pen.toString());
     }
 
     public void cleanPen(Pen pen) {
-
+        pen.clean();
     }
 
     public void feedAnimals(Pen pen) {
-
+        pen.feedAnimals();
     }
 
     public void moveAnimal(Animal animal, Pen outComingPen, Pen inComingPen) {

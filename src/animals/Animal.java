@@ -1,5 +1,7 @@
 package animals;
 
+import java.util.Random;
+
 /**
  * Abstract class Animal
  */
@@ -14,14 +16,6 @@ public abstract class Animal {
     protected int hunger, health;
     protected boolean isAsleep;
 
-
-    /**
-     * @param name
-     * @param gender
-     * @param weight
-     * @param size
-     * @param age
-     */
     public Animal(String name, Gender gender, double weight, double size, int age) {
         this.name = name;
         this.gender = gender;
@@ -30,7 +24,7 @@ public abstract class Animal {
         this.age = age;
         this.hunger = 100;
         this.health = 100;
-        this.isAsleep = true;
+        this.isAsleep = new Random().nextBoolean();
     }
 
     public String getName() {
@@ -98,20 +92,34 @@ public abstract class Animal {
     }
 
     public void eat() {
-        if (!isAsleep) {
-
+        if (this.isAsleep)
+            System.out.println("L'animal dort.");
+        else {
+            System.out.println("État de la faim de l'animal (sur 100) : "+this.hunger);
+            if(this.hunger < 100){
+                System.out.println("Nourrissage de l'animal..");
+                this.hunger = 100;
+            }
+            System.out.println("L'animal à le ventre plein !");
         }
+    }
+
+    public abstract void talk();
+
+    public void takeCare() {
+        System.out.println("État de santé de l'animal (sur 100) : "+this.health);
+        if(this.health < 100){
+            System.out.println("Soin de l'animal..");
+            this.health = 100;
+        }
+        System.out.println("L'animal est en parfaite santé !");
     }
 
     public void switchIsAsleep() {
         isAsleep = !isAsleep;
-    }
-
-    public String talk() {
-        return "Roar";
-    }
-
-    public void takeCare() {
-
+        if(this.isAsleep)
+            System.out.println("L'animal s'endort.");
+        else
+            System.out.println("L'animal se réveille.");
     }
 }

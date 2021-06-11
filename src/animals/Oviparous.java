@@ -3,14 +3,6 @@ package animals;
 public abstract class Oviparous extends Animal {
     protected int incubationDelay;
 
-    /**
-     * @param name
-     * @param gender
-     * @param weight
-     * @param size
-     * @param age
-     * @param incubationDelay
-     */
     public Oviparous(String name, Gender gender, double weight, double size, int age, int incubationDelay) {
         super(name, gender, weight, size, age);
         this.incubationDelay = incubationDelay;
@@ -24,10 +16,10 @@ public abstract class Oviparous extends Animal {
         this.incubationDelay = incubationDelay;
     }
 
-    public String lay() {
-        if (gender == Gender.F) {
-            return "Lay";
-        }
-        return "Cannot lay !";
+    public void lay() {
+        if(this.gender == Gender.F){
+            System.out.println("L'animal pond des oeufs..");
+        } else
+            System.out.println("Cet animal est un mâle -_-'");
     }
 }

@@ -13,12 +13,6 @@ public class Zoo {
     private ArrayList<Pen> pens;
     Scanner keyboard = new Scanner(System.in);
 
-    /**
-     * @param name
-     * @param employee
-     * @param maxPensNumber
-     * @param pens
-     */
     public Zoo(String name, Employee employee, int maxPensNumber, ArrayList<Pen> pens) {
         this.name = name;
         this.employee = employee;
@@ -58,12 +52,13 @@ public class Zoo {
         this.pens = pens;
     }
 
-    public String printNumberOfAnimals() {
-        return "Nombre d'animaux";
+    public void printNumberOfAnimals() {
+        int numberOfAnimal = this.pens.stream().mapToInt(Pen::getAnimalsNumber).sum();
+        System.out.println("Nombre total d'animaux dans le zoo : "+numberOfAnimal);
     }
 
-    public String printAnimalsFromPens() {
-        return "Animaux des enclos";
+    public void printAnimalsFromPens() {
+        this.pens.forEach((pen) -> System.out.println(pen.toString()));
     }
 
     public static void main(String[] args) {

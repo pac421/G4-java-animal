@@ -6,20 +6,17 @@ import animals.movements.Swimmer;
 
 public class Whale extends Mammal implements Swimmer {
 
-    /**
-     * @param name
-     * @param gender
-     * @param weight
-     * @param size
-     * @param age
-     * @param gestationDelay
-     */
     public Whale(String name, Animal.Gender gender, double weight, double size, int age, int gestationDelay) {
         super(name, gender, weight, size, age, gestationDelay);
     }
 
     @Override
     public void swim() {
+        System.out.println("La baleine nage paisiblement.. Dans un aquarium.. Plausible..");
+    }
 
+    @Override
+    public void talk() {
+        System.out.println("EEEEEEEEEEUUUUUUUUUUUUUUUUU!!!");
     }
 }
