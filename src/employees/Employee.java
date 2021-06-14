@@ -11,6 +11,9 @@ public class Employee {
     private Gender gender;
     private int age;
 
+    public Employee() {
+    }
+
     public Employee(String name, Gender gender, int age) {
         this.name = name;
         this.gender = gender;
@@ -59,6 +62,6 @@ public class Employee {
 
     @Override
     public String toString() {
-        return this.name+(this.gender == Gender.M ? " un homme" : " une femme")+" de "+this.age+" ans";
+        return this.name+(this.gender == Gender.M ? ", un homme" : " une femme")+" de "+this.age+" ans";
     }
 }

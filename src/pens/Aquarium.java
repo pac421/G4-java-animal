@@ -8,6 +8,18 @@ public class Aquarium extends Pen {
     private State depth;
     private State salinity;
 
+    public Aquarium(String name, double area, int maxAnimalsNumber, State depth, State salinity) {
+        super(name, area, maxAnimalsNumber);
+        this.depth = depth;
+        this.salinity = salinity;
+    }
+
+    public Aquarium(String name, double area, int maxAnimalsNumber, int animalsNumber, ArrayList<? extends Animal> animals, State depth, State salinity) {
+        super(name, area, maxAnimalsNumber, animalsNumber, animals);
+        this.depth = depth;
+        this.salinity = salinity;
+    }
+
     public void clean() {
         System.out.println("État de propreté du bassin : "+this.cleanliness);
         if(this.cleanliness == State.Bad){

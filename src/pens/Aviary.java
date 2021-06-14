@@ -7,6 +7,16 @@ import java.util.ArrayList;
 public class Aviary extends Pen {
     private float height;
 
+    public Aviary(String name, double area, int maxAnimalsNumber, float height) {
+        super(name, area, maxAnimalsNumber);
+        this.height = height;
+    }
+
+    public Aviary(String name, double area, int maxAnimalsNumber, int animalsNumber, ArrayList<? extends Animal> animals, float height) {
+        super(name, area, maxAnimalsNumber, animalsNumber, animals);
+        this.height = height;
+    }
+
     public void clean() {
         System.out.println("État de propreté de la volière : "+this.cleanliness);
         if(this.cleanliness == State.Bad){

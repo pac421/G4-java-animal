@@ -4,7 +4,7 @@ import animals.*;
 import java.util.ArrayList;
 
 public class Pen {
-    protected enum State {
+    public enum State {
         Bad, Correct, Good
     }
     protected String name;
@@ -13,6 +13,23 @@ public class Pen {
     protected int animalsNumber;
     ArrayList<? extends Animal> animals;
     State cleanliness;
+
+    public Pen(String name, double area, int maxAnimalsNumber) {
+        this.name = name;
+        this.area = area;
+        this.maxAnimalsNumber = maxAnimalsNumber;
+        this.animalsNumber = 0;
+        this.cleanliness = State.Good;
+    }
+
+    public Pen(String name, double area, int maxAnimalsNumber, int animalsNumber, ArrayList<? extends Animal> animals) {
+        this.name = name;
+        this.area = area;
+        this.maxAnimalsNumber = maxAnimalsNumber;
+        this.animalsNumber = animalsNumber;
+        this.animals = animals;
+        this.cleanliness = State.Good;
+    }
 
     public String getName() {
         return name;
@@ -57,6 +74,7 @@ public class Pen {
     public <T extends Animal> void addAnimal(ArrayList<T> animals, T animal) {
         if(this.animalsNumber < this.maxAnimalsNumber){
             animals.add(animal);
+            this.animals = animals;
             this.animalsNumber++;
             System.out.println("L'animal aime son nouvel enclos !");
         } else
@@ -67,6 +85,7 @@ public class Pen {
     public <T extends Animal> void removeAnimal(ArrayList<T> animals, T animal) {
         if(animals.contains(animal)){
             animals.remove(animal);
+            this.animals = animals;
             this.animalsNumber--;
             System.out.println("L'animal a bien été retiré !");
         } else
@@ -91,9 +110,13 @@ public class Pen {
     }
 
     public void showDetails() {
-        System.out.println("Enclos");
+        System.out.println("Enclos : ");
         System.out.println(this.name+", "+this.area+"m2, "+this.animalsNumber+"/"+this.maxAnimalsNumber+", État:"+this.cleanliness);
         System.out.println("Animaux :");
-        this.animals.forEach(Animal::showDetails);
+        if (this.animals != null) {
+            this.animals.forEach(Animal::showDetails);
+        } else {
+            System.out.println("Aucun animal dans cet enclos");
+        }
     }
 }

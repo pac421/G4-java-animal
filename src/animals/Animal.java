@@ -6,7 +6,7 @@ import java.util.Random;
  * Abstract class Animal
  */
 public abstract class Animal {
-    protected enum Gender {
+    public enum Gender {
         F, M
     }
     protected String name;
