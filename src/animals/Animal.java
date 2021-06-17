@@ -235,4 +235,11 @@ public abstract class Animal {
     public void showDetails(){
         System.out.println(this.name+", "+this.gender+", "+this.weight+"kg, "+this.size+"cm, "+this.age+"ans, faim:"+this.hunger+", santé:"+this.health+", Endormi:"+this.isAsleep);
     }
+
+    /**
+     * @return details about the animal
+     */
+    public String toString(){
+        return this.name+", "+this.gender+", "+this.weight+"kg, "+this.size+"cm, "+this.age+"ans, faim:"+this.hunger+", santé:"+this.health+", Endormi:"+this.isAsleep;
+    }
 }
