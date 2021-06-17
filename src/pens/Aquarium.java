@@ -8,16 +8,16 @@ public class Aquarium extends Pen {
     private State depth;
     private State salinity;
 
-    public Aquarium(String name, double area, int maxAnimalsNumber, State depth, State salinity) {
+    public Aquarium(String name, double area, int maxAnimalsNumber) {
         super(name, area, maxAnimalsNumber);
-        this.depth = depth;
-        this.salinity = salinity;
+        this.depth = State.Good;
+        this.salinity = State.Good;
     }
 
-    public Aquarium(String name, double area, int maxAnimalsNumber, int animalsNumber, ArrayList<? extends Animal> animals, State depth, State salinity) {
+    public Aquarium(String name, double area, int maxAnimalsNumber, int animalsNumber, ArrayList<? extends Animal> animals) {
         super(name, area, maxAnimalsNumber, animalsNumber, animals);
-        this.depth = depth;
-        this.salinity = salinity;
+        this.depth = State.Good;
+        this.salinity = State.Good;
     }
 
     public void clean() {

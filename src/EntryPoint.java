@@ -61,8 +61,13 @@ public class EntryPoint {
         bears.add(new Bear("Josiane", Animal.Gender.F, 80, 160, 2, 18));
         bears.add(new Bear("Maurice", Animal.Gender.M, 180, 170, 12, 18));
 
+        ArrayList<Penguin> penguins = new ArrayList<Penguin>();
+        penguins.add(new Penguin("Pépé le Pingouin", Animal.Gender.M, 12, 18, 2, 4));
+        penguins.add(new Penguin("Lily", Animal.Gender.F, 8, 16, 4, 4));
+
         ArrayList<Pen> pens = new ArrayList<>();
         pens.add(new Pen("Le coin des ours", 2000, 3, 3, bears));
+        pens.add(new Aquarium("Plouf chez les pingouins", 500, 10, 1, penguins));
 
         Zoo zoo = new Zoo("Zoo G4", employee, 10, pens);
         System.out.println("Vous devez gérer un zoo. Voici de quoi il se compose :");
