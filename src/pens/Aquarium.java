@@ -4,22 +4,49 @@ import animals.Animal;
 import animals.movements.Swimmer;
 import java.util.ArrayList;
 
+/**
+ * Aquarium Class
+ * Extends Pen Class
+ */
 public class Aquarium extends Pen {
+    /**
+     * {@link Pen.State} representing aquarium depth state (Good, Correct or Bad)
+     */
     private State depth;
+    /**
+     * {@link Pen.State} representing aquarium salinity state (Good, Correct or Bad)
+     */
     private State salinity;
 
+    /**
+     * Aquarium constructor without any animal
+     * @param name Pen name
+     * @param area Pen area - in m2
+     * @param maxAnimalsNumber Max animals number that can be in the pen
+     */
     public Aquarium(String name, double area, int maxAnimalsNumber) {
         super(name, area, maxAnimalsNumber);
         this.depth = State.Good;
         this.salinity = State.Good;
     }
 
+    /**
+     * Aquarium constructor having animals
+     * @param name Pen name
+     * @param area Pen area - in m2
+     * @param maxAnimalsNumber Max animals number that can be in the pen
+     * @param animalsNumber Number of animals contained in the pen
+     * @param animals ArrayList of animals contained in the pen
+     */
     public Aquarium(String name, double area, int maxAnimalsNumber, int animalsNumber, ArrayList<? extends Animal> animals) {
         super(name, area, maxAnimalsNumber, animalsNumber, animals);
         this.depth = State.Good;
         this.salinity = State.Good;
     }
 
+    /**
+     * Clean the aquarium - cleanliness to State Good
+     */
     public void clean() {
         System.out.println("État de propreté du bassin : "+this.cleanliness);
         if(this.cleanliness == State.Bad){
@@ -42,6 +69,12 @@ public class Aquarium extends Pen {
         System.out.println("Le bassin est propre !");
     }
 
+    /**
+     * Add an animal in the aquarium
+     * @param animals  ArrayList of animals being in the aquarium
+     * @param animal Animal to add in the aquarium
+     * @param <T> Kind of animals being in the aquarium (Ex : Sharks, etc)
+     */
     public <T extends Animal> void addAnimal(ArrayList<T> animals, T animal) {
         if(this.animalsNumber < this.maxAnimalsNumber){
             if (animal instanceof Swimmer){
@@ -51,7 +84,6 @@ public class Aquarium extends Pen {
                 System.out.println("Ce n'est pas un animal marin -_-'");
         } else
             System.out.println("La cage est déjà pleine :(");
-
     }
 }
 

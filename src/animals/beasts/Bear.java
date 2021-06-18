@@ -5,7 +5,7 @@ import animals.Mammal;
 import animals.movements.Walker;
 
 /**
- * Class Bear
+ * Bear Class
  * Extends Mammal Class
  * Implements Walker Interface
  */

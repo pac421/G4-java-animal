@@ -7,9 +7,19 @@ import zoos.Zoo;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * EntryPoint Class
+ * The software starts here
+ */
 public class EntryPoint {
+    /**
+     * Scanner getting datas from user
+     */
     private static final Scanner keyboard = new Scanner(System.in);
 
+    /**
+     * @param args Arguments
+     */
     public static void main(String[] args) {
         Employee employee = initializeEmployee();
         Zoo zoo = initializeZoo(employee);

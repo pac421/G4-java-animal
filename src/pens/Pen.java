@@ -1,19 +1,53 @@
 package pens;
 
 import animals.*;
+import employees.Employee;
+
 import java.util.ArrayList;
 
+/**
+ * Pen class
+ */
 public class Pen {
+    /**
+     * Enum State
+     * Bad, Correct or Good
+     */
     public enum State {
         Bad, Correct, Good
     }
+
+    /**
+     * {@link String} representing pen name
+     */
     protected String name;
+    /**
+     * {@link double} representing pen area - in m2
+     */
     protected double area;
+    /**
+     * {@link int} representing max animals number that can be in the pen
+     */
     protected int maxAnimalsNumber;
+    /**
+     * {@link int} representing how many animals contains the pen
+     */
     protected int animalsNumber;
+    /**
+     * {@link ArrayList} a list of all animals the pen contains
+     */
     ArrayList<? extends Animal> animals;
+    /**
+     * {@link Pen.State} representing pen cleanliness (Good, Correct or Bad)
+     */
     State cleanliness;
 
+    /**
+     * Pen constructor without any animal
+     * @param name Pen name
+     * @param area Pen area - in m2
+     * @param maxAnimalsNumber Max animals number that can be in the pen
+     */
     public Pen(String name, double area, int maxAnimalsNumber) {
         this.name = name;
         this.area = area;
@@ -22,6 +56,14 @@ public class Pen {
         this.cleanliness = State.Good;
     }
 
+    /**
+     * Pen constructor having animals
+     * @param name Pen name
+     * @param area Pen area - in m2
+     * @param maxAnimalsNumber Max animals number that can be in the pen
+     * @param animalsNumber Number of animals contained in the pen
+     * @param animals ArrayList of animals contained in the pen
+     */
     public Pen(String name, double area, int maxAnimalsNumber, int animalsNumber, ArrayList<? extends Animal> animals) {
         this.name = name;
         this.area = area;
@@ -31,46 +73,92 @@ public class Pen {
         this.cleanliness = State.Good;
     }
 
+    /**
+     * Get pen name
+     * @return {@link Pen#name}
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the {@link Pen#name}
+     * @param name Pen name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Get pen area
+     * @return {@link Pen#area}
+     */
     public double getArea() {
         return area;
     }
 
+    /**
+     * Sets the {@link Pen#area}
+     * @param area Pen area
+     */
     public void setArea(double area) {
         this.area = area;
     }
 
+    /**
+     * Get max animals number that can be in the pen
+     * @return {@link Pen#maxAnimalsNumber}
+     */
     public int getMaxAnimalsNumber() {
         return maxAnimalsNumber;
     }
 
+    /**
+     * Sets the {@link Pen#maxAnimalsNumber}
+     * @param maxAnimalsNumber Max animals number that can be in the pen
+     */
     public void setMaxAnimalsNumber(int maxAnimalsNumber) {
         this.maxAnimalsNumber = maxAnimalsNumber;
     }
 
+    /**
+     * Get how many animals contains the pen
+     * @return {@link Pen#animalsNumber}
+     */
     public int getAnimalsNumber() {
         return animalsNumber;
     }
 
+    /**
+     * Sets the {@link Pen#animalsNumber}
+     * @param animalsNumber Number of animals being in the pen
+     */
     public void setAnimalsNumber(int animalsNumber) {
         this.animalsNumber = animalsNumber;
     }
 
+    /**
+     * Get pen cleanliness
+     * @return {@link Pen#cleanliness}
+     */
     public State getCleanliness() {
         return cleanliness;
     }
 
+    /**
+     * Sets the {@link Pen#cleanliness}
+     * @param cleanliness Pen cleanliness state
+     */
     public void setCleanliness(State cleanliness) {
         this.cleanliness = cleanliness;
     }
 
+    /**
+     * Add an animal in the pen
+     * @param animals  ArrayList of animals being in the pen
+     * @param animal Animal to add in the pen
+     * @param <T> Kind of animals being in the pen (Ex : Bears, Sharks, etc)
+     */
     public <T extends Animal> void addAnimal(ArrayList<T> animals, T animal) {
         if(this.animalsNumber < this.maxAnimalsNumber){
             animals.add(animal);
@@ -82,6 +170,12 @@ public class Pen {
 
     }
 
+    /**
+     * Remove an animal from the pen
+     * @param animals  ArrayList of animals being in the pen
+     * @param animal Animal to remove from the pen
+     * @param <T> Kind of animals being in the pen (Ex : Bears, Sharks, etc)
+     */
     public <T extends Animal> void removeAnimal(ArrayList<T> animals, T animal) {
         if(animals.contains(animal)){
             animals.remove(animal);
@@ -93,6 +187,9 @@ public class Pen {
 
     }
 
+    /**
+     * Feed animals being in the pen
+     */
     public void feedAnimals() {
         if(this.animalsNumber > 0)
             this.animals.forEach(Animal::feed);
@@ -100,6 +197,9 @@ public class Pen {
             System.out.println("La cage est vide.");
     }
 
+    /**
+     * Clean the pen - cleanliness to State Good
+     */
     public void clean() {
         System.out.println("État de propreté de l'enclos : "+this.cleanliness);
         if(this.cleanliness == State.Bad){
@@ -109,6 +209,9 @@ public class Pen {
         System.out.println("L'enclos est propre !");
     }
 
+    /**
+     * Print pen details
+     */
     public void showDetails() {
         System.out.println("Enclos : ");
         System.out.println(this.name+", "+this.area+"m2, "+this.animalsNumber+"/"+this.maxAnimalsNumber+", État:"+this.cleanliness);
