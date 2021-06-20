@@ -1,3 +1,4 @@
+import UI.ConsoleColors;
 import animals.Animal;
 import animals.beasts.*;
 import employees.Employee;
@@ -25,8 +26,8 @@ public class EntryPoint implements Runnable {
      * @param args Arguments
      */
     public static void main(String[] args) {
-        System.out.println("\n\n---------- Bienvenue sur ZooLogic ----------");
-        System.out.println("Vous êtes le gérant d'un Zoo. Faites en sorte que les animaux se portent bien et soient heureux !\n");
+        System.out.println("\n\n" + ConsoleColors.YELLOW_BOLD_BRIGHT + "---------- Bienvenue sur ZooLogic ----------");
+        System.out.println("Vous êtes le gérant d'un Zoo. Faites en sorte que les animaux se portent bien et soient heureux !" + ConsoleColors.RESET + "\n");
 
         initEmployee();
         initZoo();
@@ -240,11 +241,9 @@ public class EntryPoint implements Runnable {
             try {
                 Thread.sleep(30000);
 
-                System.out.println("\nIl y a du nouveau !");
+                System.out.println("\n" + ConsoleColors.RED_BACKGROUND + "Il y a du nouveau !" + ConsoleColors.RESET);
                 zoo.changeAnimalState();
                 zoo.changePenState();
-
-                playDefaultInteraction();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

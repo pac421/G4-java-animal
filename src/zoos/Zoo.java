@@ -1,5 +1,6 @@
 package zoos;
 
+import UI.ConsoleColors;
 import animals.Animal;
 import employees.*;
 import pens.*;
@@ -116,11 +117,12 @@ public class Zoo {
      * Print animals details that the pen contains
      */
     public void printAnimalsFromPens() {
-        System.out.println("\nDescription du Zoo :");
+        System.out.println("\n" + ConsoleColors.PURPLE + "Description du Zoo :");
         if(this.pens.size() > 0){
             this.pens.forEach(Pen::showDetails);
         } else
             System.out.println("Le zoo ne comporte pas encore d'animaux.");
+        System.out.println(ConsoleColors.RESET);
     }
 
     /**
@@ -136,11 +138,11 @@ public class Zoo {
                 switch (action) {
                     case 0 -> {
                         animal.setHealth((int) (Math.random() * 100));
-                        System.out.println("La santé de \"" + animal.getName() + "\" est passé à " + animal.getHealth() + "/100.");
+                        System.out.println(ConsoleColors.RED + "La santé de \"" + animal.getName() + "\" est passé à " + animal.getHealth() + "/100." + ConsoleColors.RESET);
                     }
                     case 1 -> {
                         animal.setHunger((int) (Math.random() * 100));
-                        System.out.println("La faim de \"" + animal.getName() + "\" est passée à " + animal.getHunger() + "/100.");
+                        System.out.println(ConsoleColors.RED + "La faim de \"" + animal.getName() + "\" est passée à " + animal.getHunger() + "/100." + ConsoleColors.RESET);
                     }
                     case 2 -> {
                         animal.switchIsAsleep();
@@ -157,7 +159,7 @@ public class Zoo {
         if(this.pens.size() > 0){
             Pen pen = pens.get((int)(Math.random() * this.pens.size()));
             pen.setCleanliness(Pen.State.Bad);
-            System.out.println("L'enclos \"" + pen.getName() + "\" est sale !");
+            System.out.println(ConsoleColors.RED + "L'enclos \"" + pen.getName() + "\" est sale !" + ConsoleColors.RESET);
         }
     }
 }

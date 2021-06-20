@@ -1,5 +1,7 @@
 package animals;
 
+import UI.ConsoleColors;
+
 import java.util.Random;
 
 /**
@@ -188,14 +190,14 @@ public abstract class Animal {
      */
     public void feed() {
         if (this.isAsleep)
-            System.out.println("L'animal dort.");
+            System.out.println(ConsoleColors.RED + "L'animal dort." + ConsoleColors.RESET);
         else {
-            System.out.println("État de la faim de l'animal (sur 100) : "+this.hunger);
+            System.out.println(ConsoleColors.GREEN + "État de la faim de l'animal (sur 100) : "+this.hunger);
             if(this.hunger < 100){
                 System.out.println("Nourrissage de l'animal..");
                 this.hunger = 100;
             }
-            System.out.println("L'animal à le ventre plein !");
+            System.out.println("L'animal à le ventre plein !" + ConsoleColors.RESET);
         }
     }
 
@@ -208,12 +210,12 @@ public abstract class Animal {
      * Takes care of animal putting {@link Animal#health} to 100/100
      */
     public void takeCare() {
-        System.out.println("État de santé de l'animal (sur 100) : "+this.health);
+        System.out.println(ConsoleColors.GREEN + "État de santé de l'animal (sur 100) : "+this.health);
         if(this.health < 100){
             System.out.println("Soin de l'animal..");
             this.health = 100;
         }
-        System.out.println("L'animal est en parfaite santé !");
+        System.out.println("L'animal est en parfaite santé !" + ConsoleColors.RESET);
     }
 
     /**
@@ -224,9 +226,9 @@ public abstract class Animal {
     public void switchIsAsleep() {
         isAsleep = !isAsleep;
         if(this.isAsleep)
-            System.out.println(this.name+" s'endort.");
+            System.out.println(ConsoleColors.RED + this.name+ " s'endort." + ConsoleColors.RESET);
         else
-            System.out.println(this.name+" se réveille.");
+            System.out.println(ConsoleColors.RED + this.name+ " se réveille." + ConsoleColors.RESET);
     }
 
     /**

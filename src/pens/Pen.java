@@ -1,5 +1,6 @@
 package pens;
 
+import UI.ConsoleColors;
 import animals.*;
 import employees.Employee;
 
@@ -219,12 +220,12 @@ public class Pen {
      * Clean the pen - cleanliness to State Good
      */
     public void clean() {
-        System.out.println("État de propreté de l'enclos : "+this.cleanliness);
+        System.out.println(ConsoleColors.GREEN + "État de propreté de l'enclos : "+this.cleanliness);
         if(this.cleanliness == State.Bad){
             System.out.println("Nettoyage de l'enclos..");
             this.cleanliness = State.Good;
         }
-        System.out.println("L'enclos est propre !");
+        System.out.println("L'enclos est propre !" + ConsoleColors.RESET);
     }
 
     /**
