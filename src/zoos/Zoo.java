@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Zoo Class
  */
-public class Zoo implements Runnable {
+public class Zoo {
     /**
      * {@link String} representing zoo name
      */
@@ -134,18 +134,17 @@ public class Zoo implements Runnable {
                 Animal animal = animals.get((int)(Math.random() * animals.size()));
                 int action = (int)(Math.random() * 3);
                 switch (action) {
-                    case 0:
-                        animal.setHealth((int)(Math.random() * 100));
-                        System.out.println("L'état de santé de l'animal " + animal.getName() + " est : " + animal.getHealth() + "/100");
-                        break;
-                    case 1:
-                        animal.setHunger((int)(Math.random() * 100));
-                        System.out.println("La faim de l'animal " + animal.getName() + " a changé. Niveau : " + animal.getHunger() + "/100");
-                        break;
-                    case 2:
+                    case 0 -> {
+                        animal.setHealth((int) (Math.random() * 100));
+                        System.out.println("La santé de " + animal.getName() + " est passé à " + animal.getHealth() + "/100.");
+                    }
+                    case 1 -> {
+                        animal.setHunger((int) (Math.random() * 100));
+                        System.out.println("La faim de " + animal.getName() + " est passé à " + animal.getHunger() + "/100.");
+                    }
+                    case 2 -> {
                         animal.switchIsAsleep();
-                        System.out.println("L'état de sommeil de l'animal " + animal.getName() + " a changé. Etat: " + animal.isAsleep());
-                        break;
+                    }
                 }
             }
         }
@@ -160,15 +159,5 @@ public class Zoo implements Runnable {
             pen.setCleanliness(Pen.State.Bad);
             System.out.println("L'enclos \"" + pen.getName() + "\" est sale !");
         }
-    }
-
-
-    /**
-     * Runs changeAnimalState and changePenState methods
-     */
-    @Override
-    public void run() {
-        changeAnimalState();
-        changePenState();
     }
 }

@@ -224,9 +224,9 @@ public abstract class Animal {
     public void switchIsAsleep() {
         isAsleep = !isAsleep;
         if(this.isAsleep)
-            System.out.println("L'animal s'endort.");
+            System.out.println(this.name+" s'endort.");
         else
-            System.out.println("L'animal se réveille.");
+            System.out.println(this.name+" se réveille.");
     }
 
     /**

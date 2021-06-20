@@ -10,11 +10,11 @@ import java.util.Scanner;
  * EntryPoint Class
  * The software starts here
  */
-public class EntryPoint {
+public class EntryPoint implements Runnable {
     /**
      * Scanner getting datas from user
      */
-    private static final Scanner keyboard = new Scanner(System.in);
+    private static Scanner keyboard = new Scanner(System.in);
 
     private static Employee employee;
     private static Zoo zoo;
@@ -29,13 +29,7 @@ public class EntryPoint {
         initEmployee();
         initZoo();
 
-        // A mettre dans thread :
-        /*
-        zoo.changeAnimalState(); // Modifier état d'un animal aléatoirement
-        zoo.changePenState(); // Modifier état d'un enclos aléatoirement
-        */
-
-        startInteraction();
+        playInteraction();
     }
 
     /**
@@ -101,40 +95,50 @@ public class EntryPoint {
 
         zoo = new Zoo("Zoo G4", employee, 10, pens);
         zoo.printAnimalsFromPens();
+
+        EntryPoint entryPoint = new EntryPoint();
+        Thread thread = new Thread(entryPoint);
+        thread.start();
     }
 
     /**
      * Start the interaction with the user
      */
-    private static void startInteraction() {
-        System.out.println("\nQue souhaitez-vous faire ?\n1: Afficher les informations de tous les enclos\n2: Nourrir les animaux\n3: Soigner les animaux malades\n4: Nettoyer les enclos sales\n5: Quitter l'application");
+    private static void playInteraction() {
+        keyboard = new Scanner(System.in);
+
+        System.out.println("\nQue souhaitez-vous faire ?\n1: Afficher l'état du Zoo\n2: Aller dans un enclos\n3: Démissionner du Zoo");
         String choice = keyboard.nextLine();
         if (!choice.isEmpty()) {
             switch (choice) {
-                case "1":
-                    System.out.println("Informations des enclos");
-                    zoo.printAnimalsFromPens();
-                    break;
-                case "2":
-                    System.out.println("Nourriture des animaux en cours...");
-                    if (zoo.getPens().size() > 0) {
-                        zoo.getPens().forEach(Pen::feedAnimals);
-                    }
-                    break;
-                case "3":
-                    System.out.println("Soins aux animaux en cours...");
-                    if (zoo.getPens().size() > 0) {
-                        zoo.getPens().forEach(Pen::takeCareOfAnimals);
-                    }
-                    break;
-                case "4":
-                    System.out.println("Nettoyage des enclos en cours...");
-                    if (zoo.getPens().size() > 0) {
-                        zoo.getPens().forEach(Pen::clean);
-                    }
-                    break;
-                default:
-                    System.out.println("Au revoir");
+                case "1" -> zoo.printAnimalsFromPens();
+                case "2" -> goIntoPen();
+                case "3" -> {
+                    System.out.println("Dommage..\nVotre fénéantise à causer la mort de tous les animaux..");
+                    System.exit(0);
+                }
+            }
+        }
+    }
+
+    private static void goIntoPen(){
+        System.out.println("\nDans quel enlos souhaitez-vous vous rendre ?");
+
+    }
+
+    @Override
+    public void run() {
+        while(true) {
+            try {
+                Thread.sleep(10000);
+
+                System.out.println("\nIl y a du nouveau !");
+                zoo.changeAnimalState();
+                zoo.changePenState();
+
+                playInteraction();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
