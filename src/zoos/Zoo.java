@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Zoo Class
  */
-public class Zoo {
+public class Zoo implements Runnable {
     /**
      * {@link String} representing zoo name
      */
@@ -160,5 +160,15 @@ public class Zoo {
             pen.setCleanliness(Pen.State.Bad);
             System.out.println("L'enclos \"" + pen.getName() + "\" est sale !");
         }
+    }
+
+
+    /**
+     * Runs changeAnimalState and changePenState methods
+     */
+    @Override
+    public void run() {
+        changeAnimalState();
+        changePenState();
     }
 }

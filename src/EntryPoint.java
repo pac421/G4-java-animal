@@ -24,7 +24,7 @@ public class EntryPoint {
      */
     public static void main(String[] args) {
         System.out.println("\n\n---------- Bienvenue sur ZooLogic ----------");
-        System.out.println("Vous êtes le gérant d'un Zoo. Faite en sorte que les animaux se portent bien et soit heureux !\n");
+        System.out.println("Vous êtes le gérant d'un Zoo. Faite en sorte que les animaux se portent bien et soient heureux !\n");
 
         initEmployee();
         initZoo();
@@ -104,7 +104,7 @@ public class EntryPoint {
     }
 
     /**
-     * Begin the interaction with the user
+     * Start the interaction with the user
      */
     private static void startInteraction() {
         System.out.println("\nQue souhaitez-vous faire ?\n1: Afficher les informations de tous les enclos\n2: Nourrir les animaux\n3: Soigner les animaux malades\n4: Nettoyer les enclos sales\n5: Quitter l'application");
