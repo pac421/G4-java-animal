@@ -23,3 +23,5 @@
 hs_err_pid*
 
 .idea
+
+!/out/artifacts/G4_java_animal_jar/G4-java-animal.jar
