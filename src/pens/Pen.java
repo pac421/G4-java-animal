@@ -154,6 +154,14 @@ public class Pen {
     }
 
     /**
+     * Get animals that are in the pen
+     * @return {@link Pen#animals}
+     */
+    public ArrayList<? extends Animal> getAnimals() {
+        return animals;
+    }
+
+    /**
      * Add an animal in the pen
      * @param animals  ArrayList of animals being in the pen
      * @param animal Animal to add in the pen
@@ -198,6 +206,16 @@ public class Pen {
     }
 
     /**
+     * Take care of animals being in the pen
+     */
+    public void takeCareOfAnimals() {
+        if(this.animalsNumber > 0)
+            this.animals.forEach(Animal::takeCare);
+        else
+            System.out.println("La cage est vide.");
+    }
+
+    /**
      * Clean the pen - cleanliness to State Good
      */
     public void clean() {
@@ -213,13 +231,12 @@ public class Pen {
      * Print pen details
      */
     public void showDetails() {
-        System.out.println("Enclos : ");
-        System.out.println(this.name+", "+this.area+"m2, "+this.animalsNumber+"/"+this.maxAnimalsNumber+", État:"+this.cleanliness);
-        System.out.println("Animaux :");
+        System.out.println("\"" + this.name+"\", enclos de "+this.area+"m2, nombre d'animaux:"+this.animalsNumber+"/"+this.maxAnimalsNumber+", État:"+this.cleanliness + ", contient :");
         if (this.animals != null) {
             this.animals.forEach(Animal::showDetails);
         } else {
             System.out.println("Aucun animal dans cet enclos");
         }
+        System.out.println("---");
     }
 }

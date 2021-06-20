@@ -21,11 +21,24 @@ public class EntryPoint {
      * @param args Arguments
      */
     public static void main(String[] args) {
-        Employee employee = initializeEmployee();
+        //Employee employee = initializeEmployee();
+        Employee employee = new Employee("Michel", Employee.Gender.F, 23);
         Zoo zoo = initializeZoo(employee);
-        startDialog();
+
+        // A intervalles réguliers :
+
+        // Modifier état d'un animal aléatoirement
+        zoo.changeAnimalState();
+        // Modifier état d'un enclos aléatoirement
+        zoo.changePenState();
+        // Passer la main à l'employé : Nombre d'actions par intervalles de temps limitées
+        playWithUser(zoo);
     }
 
+    /**
+     * Initialize the employee of the zoo getting user datas
+     * @return employee
+     */
     private static Employee initializeEmployee() {
         ArrayList<String> messages = new ArrayList<>();
         messages.add("Bonjour et bienvenue au zoo ! Merci d'indiquer votre nom");
@@ -65,6 +78,11 @@ public class EntryPoint {
         return employee;
     }
 
+    /**
+     * Initialize the zoo
+     * @param employee Created employee that will become the zoo employee
+     * @return zoo
+     */
     private static Zoo initializeZoo(Employee employee) {
         ArrayList<Bear> bears = new ArrayList<Bear>();
         bears.add(new Bear("José", Animal.Gender.M, 125, 180, 6, 18));
@@ -77,7 +95,7 @@ public class EntryPoint {
 
         ArrayList<Pen> pens = new ArrayList<>();
         pens.add(new Pen("Le coin des ours", 2000, 3, 3, bears));
-        pens.add(new Aquarium("Plouf chez les pingouins", 500, 10, 1, penguins));
+        pens.add(new Aquarium("Plouf chez les pingouins", 500, 10, 2, penguins));
 
         Zoo zoo = new Zoo("Zoo G4", employee, 10, pens);
         System.out.println("Vous devez gérer un zoo. Voici de quoi il se compose :");
@@ -86,15 +104,40 @@ public class EntryPoint {
         return zoo;
     }
 
-    private static void startDialog() {
+    /**
+     * Interactions with user
+     * @param zoo The zoo the user will play with
+     */
+    private static void playWithUser(Zoo zoo) {
         System.out.println("Que souhaitez-vous faire ?");
-        System.out.println("1: Créer un enclos - 2: Partir en balade avec un ours");
+        System.out.println("1: Afficher les informations de tous les enclos - 2: Nourrir les animaux - 3: Soigner les animaux malades - 4: Nettoyer les enclos sales - 5: Quitter l'application");
         String choice = keyboard.nextLine();
         if (!choice.isEmpty()) {
             switch (choice) {
-                case "1" -> System.out.println("Vous allez créer un enclos");
-                case "2" -> System.out.println("Vous partez en balade avec un ours");
-                default -> System.out.println("Au revoir");
+                case "1":
+                    System.out.println("Informations des enclos");
+                    zoo.printAnimalsFromPens();
+                    break;
+                case "2":
+                    System.out.println("Nourriture des animaux en cours...");
+                    if (zoo.getPens().size() > 0) {
+                        zoo.getPens().forEach(Pen::feedAnimals);
+                    }
+                    break;
+                case "3":
+                    System.out.println("Soins aux animaux en cours...");
+                    if (zoo.getPens().size() > 0) {
+                        zoo.getPens().forEach(Pen::takeCareOfAnimals);
+                    }
+                    break;
+                case "4":
+                    System.out.println("Nettoyage des enclos en cours...");
+                    if (zoo.getPens().size() > 0) {
+                        zoo.getPens().forEach(Pen::clean);
+                    }
+                    break;
+                default:
+                    System.out.println("Au revoir");
             }
         }
     }

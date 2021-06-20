@@ -1,5 +1,6 @@
 package zoos;
 
+import animals.Animal;
 import employees.*;
 import pens.*;
 import java.util.ArrayList;
@@ -120,5 +121,44 @@ public class Zoo {
             System.out.println("---");
         } else
             System.out.println("Le zoo ne comporte pas encore d'animaux.");
+    }
+
+    /**
+     * Change an animal state randomly
+     */
+    public void changeAnimalState() {
+        if(this.pens.size() > 0){
+            Pen pen = pens.get((int)(Math.random() * this.pens.size()));
+            ArrayList<? extends Animal> animals = pen.getAnimals();
+            if (animals.size() > 0) {
+                Animal animal = animals.get((int)(Math.random() * animals.size()));
+                int action = (int)(Math.random() * 3);
+                switch (action) {
+                    case 0:
+                        animal.setHealth((int)(Math.random() * 100));
+                        System.out.println("L'état de santé de l'animal " + animal.getName() + " est : " + animal.getHealth() + "/100");
+                        break;
+                    case 1:
+                        animal.setHunger((int)(Math.random() * 100));
+                        System.out.println("La faim de l'animal " + animal.getName() + " a changé. Niveau : " + animal.getHunger() + "/100");
+                        break;
+                    case 2:
+                        animal.switchIsAsleep();
+                        System.out.println("L'état de sommeil de l'animal " + animal.getName() + " a changé. Etat: " + animal.isAsleep());
+                        break;
+                }
+            }
+        }
+    }
+
+    /**
+     * Change a pen state randomly
+     */
+    public void changePenState() {
+        if(this.pens.size() > 0){
+            Pen pen = pens.get((int)(Math.random() * this.pens.size()));
+            pen.setCleanliness(Pen.State.Bad);
+            System.out.println("L'enclos \"" + pen.getName() + "\" est sale !");
+        }
     }
 }
