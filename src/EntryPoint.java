@@ -113,7 +113,10 @@ public class EntryPoint implements Runnable {
         String choice = keyboard.nextLine();
         if (choice != null && !choice.isEmpty()) {
             switch (choice) {
-                case "1" -> zoo.printAnimalsFromPens();
+                case "1" -> {
+                    zoo.printAnimalsFromPens();
+                    playDefaultInteraction();
+                }
                 case "2" -> playChoosePenInteraction();
                 case "3" -> {
                     System.out.println("Dommage..\nVotre fénéantise a causé la mort de tous les animaux..");
@@ -158,8 +161,14 @@ public class EntryPoint implements Runnable {
         if (choice != null && !choice.isEmpty()) {
             switch (choice) {
                 case "1" -> playChooseAnimalInteraction(pen);
-                case "2" -> pen.clean();
-                case "3" -> pen.showDetails();
+                case "2" -> {
+                    pen.clean();
+                    playPenInteraction(pen);
+                }
+                case "3" -> {
+                    pen.showDetails();
+                    playPenInteraction(pen);
+                }
                 case "4" -> playDefaultInteraction();
             }
         }
@@ -201,10 +210,22 @@ public class EntryPoint implements Runnable {
         String choice = keyboard.nextLine();
         if (choice != null && !choice.isEmpty()) {
             switch (choice) {
-                case "1" -> animal.feed();
-                case "2" -> animal.takeCare();
-                case "3" -> animal.switchIsAsleep();
-                case "4" -> animal.showDetails();
+                case "1" -> {
+                    animal.feed();
+                    playActionInteraction(animal, pen);
+                }
+                case "2" -> {
+                    animal.takeCare();
+                    playActionInteraction(animal, pen);
+                }
+                case "3" -> {
+                    animal.switchIsAsleep();
+                    playActionInteraction(animal, pen);
+                }
+                case "4" -> {
+                    animal.showDetails();
+                    playActionInteraction(animal, pen);
+                }
                 case "5" -> playPenInteraction(pen);
             }
         }
