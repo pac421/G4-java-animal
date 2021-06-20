@@ -4,7 +4,9 @@ import employees.Employee;
 import pens.*;
 import zoos.Zoo;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * EntryPoint Class
@@ -29,7 +31,7 @@ public class EntryPoint implements Runnable {
         initEmployee();
         initZoo();
 
-        playInteraction();
+        playDefaultInteraction();
     }
 
     /**
@@ -102,17 +104,17 @@ public class EntryPoint implements Runnable {
     }
 
     /**
-     * Start the interaction with the user
+     * Play another interaction with the users
      */
-    private static void playInteraction() {
-        keyboard = new Scanner(System.in);
-
+    private static void playDefaultInteraction() {
         System.out.println("\nQue souhaitez-vous faire ?\n1: Afficher l'état du Zoo\n2: Aller dans un enclos\n3: Démissionner du Zoo");
+
+        keyboard = new Scanner(System.in);
         String choice = keyboard.nextLine();
-        if (!choice.isEmpty()) {
+        if (choice != null && !choice.isEmpty()) {
             switch (choice) {
                 case "1" -> zoo.printAnimalsFromPens();
-                case "2" -> goIntoPen();
+                case "2" -> playPenInteraction();
                 case "3" -> {
                     System.out.println("Dommage..\nVotre fénéantise à causer la mort de tous les animaux..");
                     System.exit(0);
@@ -121,22 +123,71 @@ public class EntryPoint implements Runnable {
         }
     }
 
-    private static void goIntoPen(){
+    private static void playPenInteraction(){
         System.out.println("\nDans quel enlos souhaitez-vous vous rendre ?");
 
+        HashMap<Integer, Pen> penOptions = new HashMap<>();
+
+        ArrayList<Pen> pens = zoo.getPens();
+        final int[] i = {1};
+        pens.forEach((pen) -> {
+            penOptions.put(i[0], pen);
+            System.out.println(i[0] +" - "+pen.getName());
+            i[0]++;
+        });
+
+        keyboard = new Scanner(System.in);
+        String choice = keyboard.nextLine();
+        if (choice != null && !choice.isEmpty()) {
+            playAnimalInteraction(penOptions.get(Integer.parseInt(choice)));
+        }
+    }
+
+    private static void playAnimalInteraction(Pen pen){
+        System.out.println("\nDe quel animal souhaitez-vous vous occuper ?");
+
+        HashMap<Integer, Animal> animalOptions = new HashMap<>();
+
+        ArrayList<? extends Animal> animals = pen.getAnimals();
+        final int[] i = {1};
+        animals.forEach((animal) -> {
+            animalOptions.put(i[0], animal);
+            System.out.println(i[0] +" - "+animal.getName());
+            i[0]++;
+        });
+
+        keyboard = new Scanner(System.in);
+        String choice = keyboard.nextLine();
+        if (choice != null && !choice.isEmpty()) {
+            playActionInteraction(animalOptions.get(Integer.parseInt(choice)));
+        }
+    }
+
+    private static void playActionInteraction(Animal animal){
+        System.out.println("\nQue souhaitez-vous faire à "+animal.getName()+" ?\n1: Nourrir\n2: Soigner\n3: "+(animal.isAsleep() ? "Réveiller" : "Endormir"));
+
+        keyboard = new Scanner(System.in);
+        String choice = keyboard.nextLine();
+        if (choice != null && !choice.isEmpty()) {
+            switch (choice) {
+                case "1" -> animal.feed();
+                case "2" -> animal.takeCare();
+                case "3" -> animal.switchIsAsleep();
+            }
+        }
     }
 
     @Override
     public void run() {
         while(true) {
             try {
-                Thread.sleep(10000);
+                Thread.sleep(30000);
 
                 System.out.println("\nIl y a du nouveau !");
                 zoo.changeAnimalState();
                 zoo.changePenState();
 
-                playInteraction();
+                playDefaultInteraction();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
