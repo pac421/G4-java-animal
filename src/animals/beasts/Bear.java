@@ -12,6 +12,7 @@ import animals.movements.Walker;
 public class Bear extends Mammal implements Walker {
 
     /**
+     * Bear constructor
      * @param name Animal name
      * @param gender Animal gender
      * @param weight Animal weight

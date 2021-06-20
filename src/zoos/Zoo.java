@@ -126,7 +126,9 @@ public class Zoo {
     }
 
     /**
-     * Change an animal state randomly
+     * Change an animal state
+     * First choose a pen randomly - Then choose an animal from this pen randomly
+     * Finally change animal state randomly
      */
     public void changeAnimalState() {
         if(this.pens.size() > 0){
@@ -138,7 +140,7 @@ public class Zoo {
                 switch (action) {
                     case 0 -> {
                         animal.setHealth((int) (Math.random() * 100));
-                        System.out.println(ConsoleColors.RED + "La santé de \"" + animal.getName() + "\" est passé à " + animal.getHealth() + "/100." + ConsoleColors.RESET);
+                        System.out.println(ConsoleColors.RED + "La santé de \"" + animal.getName() + "\" est passée à " + animal.getHealth() + "/100." + ConsoleColors.RESET);
                     }
                     case 1 -> {
                         animal.setHunger((int) (Math.random() * 100));

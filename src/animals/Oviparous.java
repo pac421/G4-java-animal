@@ -11,6 +11,7 @@ public abstract class Oviparous extends Animal {
     protected int incubationDelay;
 
     /**
+     * Oviparous constructor
      * @param name Animal name
      * @param gender Animal gender
      * @param weight Animal weight

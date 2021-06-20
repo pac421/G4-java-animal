@@ -12,6 +12,7 @@ import animals.movements.Swimmer;
 public class Shark extends Oviparous implements Swimmer {
 
     /**
+     * Shark constructor
      * @param name Animal name
      * @param gender Animal gender
      * @param weight Animal weight

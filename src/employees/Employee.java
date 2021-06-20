@@ -12,7 +12,14 @@ public class Employee implements Runnable {
      * Enum Gender - Male or Female
      */
     public enum Gender {
-        F, M
+        /**
+         * Female
+         */
+        F,
+        /**
+         * Male
+         */
+        M
     }
     /**
      * {@link String} representing employee name
@@ -27,6 +34,9 @@ public class Employee implements Runnable {
      */
     private int age;
 
+    /**
+     * {@link int} representing employee energy level - /5
+     */
     private int energyLevel;
 
     /**
@@ -51,7 +61,7 @@ public class Employee implements Runnable {
 
     /**
      * Get employee name
-     * @return @return {@link Employee#name}
+     * @return {@link Employee#name}
      */
     public String getName() {
         return name;
@@ -147,17 +157,7 @@ public class Employee implements Runnable {
     }
 
     /**
-     * The employee move an animal from a pen to another
-     * @param animal The animal to move
-     * @param outComingPen The pen where the animal stays
-     * @param inComingPen The pen where to move the animal on
-     */
-    public void moveAnimal(Animal animal, Pen outComingPen, Pen inComingPen) {
-
-    }
-
-    /**
-     * @return Employee details to string
+     * Print Employee description to string
      */
     public void printDescription() {
         System.out.println("Vous incarnez "+this.name+(this.gender == Gender.M ? ", un homme" : ", une femme")+" de "+this.age+" ans.");
@@ -165,14 +165,14 @@ public class Employee implements Runnable {
     }
 
     /**
-     * @return Employee energy level to string
+     * Print Employee energy level to string
      */
     public void printEnergyLevel() {
         System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + "Niveau d'énergie: " + this.energyLevel + "/5." + ConsoleColors.RESET);
     }
 
     /**
-     * Launch actions every minute
+     * Launch action each 10 seconds : increase employee energy
      */
     @Override
     public void run() {

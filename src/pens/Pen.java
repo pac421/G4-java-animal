@@ -15,7 +15,18 @@ public class Pen {
      * Bad, Correct or Good
      */
     public enum State {
-        Bad, Correct, Good
+        /**
+         * Bad state
+         */
+        Bad,
+        /**
+         * Correct State
+         */
+        Correct,
+        /**
+         * Good State
+         */
+        Good
     }
 
     /**
@@ -163,7 +174,7 @@ public class Pen {
     }
 
     /**
-     * Add an animal in the pen
+     * Add an animal in the pen if it's not full
      * @param animals  ArrayList of animals being in the pen
      * @param animal Animal to add in the pen
      * @param <T> Kind of animals being in the pen (Ex : Bears, Sharks, etc)
@@ -180,7 +191,7 @@ public class Pen {
     }
 
     /**
-     * Remove an animal from the pen
+     * Remove an animal from the pen if the animal is in this pen
      * @param animals  ArrayList of animals being in the pen
      * @param animal Animal to remove from the pen
      * @param <T> Kind of animals being in the pen (Ex : Bears, Sharks, etc)

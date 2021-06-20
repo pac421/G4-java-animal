@@ -89,9 +89,16 @@ public class EntryPoint implements Runnable {
         penguins.add(new Penguin("Pépé le Pingouin", Animal.Gender.M, 12, 18, 2, 4));
         penguins.add(new Penguin("Lily", Animal.Gender.F, 8, 16, 4, 4));
 
+        ArrayList<Eagle> eagles = new ArrayList<Eagle>();
+        eagles.add(new Eagle("The Eagle", Animal.Gender.M, 10, 80, 1, 3));
+        eagles.add(new Eagle("Big Wings", Animal.Gender.F, 8, 90, 2, 3));
+        eagles.add(new Eagle("Cynthia", Animal.Gender.F, 12, 70, 3, 3));
+        eagles.add(new Eagle("Jacob", Animal.Gender.M, 9, 82, 1, 3));
+
         ArrayList<Pen> pens = new ArrayList<>();
         pens.add(new Pen("Le coin des ours", 2000, 3, 3, bears));
         pens.add(new Aquarium("Plouf chez les pingouins", 500, 10, 2, penguins));
+        pens.add(new Aviary("Les aigles doux", 1500, 6, 4, eagles));
 
         zoo = new Zoo("Zoo G4", employee, 10, pens);
         zoo.printAnimalsFromPens();
@@ -248,7 +255,7 @@ public class EntryPoint implements Runnable {
     }
 
     /**
-     * Launch actions every minute
+     * Launch actions each 40 seconds
      */
     @Override
     public void run() {

@@ -12,7 +12,14 @@ public abstract class Animal {
      * Enum - Male or Female
      */
     public enum Gender {
-        F, M
+        /**
+         * Female
+         */
+        F,
+        /**
+         * Male
+         */
+        M
     }
     /**
      * {@link String} representing animal name
@@ -48,6 +55,7 @@ public abstract class Animal {
     protected boolean isAsleep;
 
     /**
+     * Animal constructor
      * @param name Animal name
      * @param gender Animal Gender
      * @param weight Animal Weight (in kg)

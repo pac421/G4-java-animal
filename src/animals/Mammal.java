@@ -11,6 +11,7 @@ public abstract class Mammal extends Animal{
     protected int gestationDelay;
 
     /**
+     * Mammal constructor
      * @param name Animal name
      * @param gender Animal gender
      * @param weight Animal weight

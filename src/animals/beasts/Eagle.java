@@ -12,6 +12,7 @@ import animals.movements.Flyer;
 public class Eagle extends Oviparous implements Flyer {
 
     /**
+     * Eagle constructor
      * @param name Animal name
      * @param gender Animal gender
      * @param weight Animal weight

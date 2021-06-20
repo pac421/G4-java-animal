@@ -12,6 +12,7 @@ import animals.movements.Swimmer;
 public class Whale extends Mammal implements Swimmer {
 
     /**
+     * Whale constructor
      * @param name Animal name
      * @param gender Animal gender
      * @param weight Animal weight

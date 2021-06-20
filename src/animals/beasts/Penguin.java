@@ -14,6 +14,7 @@ import animals.movements.Walker;
 public class Penguin extends Oviparous implements Swimmer, Flyer, Walker {
 
     /**
+     * Penguin constructor
      * @param name Animal name
      * @param gender Animal gender
      * @param weight Animal weight
