@@ -129,8 +129,7 @@ public class Employee {
     /**
      * @return Employee details to string
      */
-    @Override
-    public String toString() {
-        return this.name+(this.gender == Gender.M ? ", un homme" : " une femme")+" de "+this.age+" ans";
+    public void printDescription() {
+        System.out.println("Vous incarnez "+this.name+(this.gender == Gender.M ? ", un homme" : " une femme")+" de "+this.age+" ans.");
     }
 }

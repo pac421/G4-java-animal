@@ -231,12 +231,11 @@ public class Pen {
      * Print pen details
      */
     public void showDetails() {
-        System.out.println("\"" + this.name+"\", enclos de "+this.area+"m2, nombre d'animaux:"+this.animalsNumber+"/"+this.maxAnimalsNumber+", État:"+this.cleanliness + ", contient :");
+        System.out.println("---\n\"" + this.name+"\", enclos de "+this.area+"m2, nombre d'animaux: "+this.animalsNumber+"/"+this.maxAnimalsNumber+", État: "+this.cleanliness + ", animaux :");
         if (this.animals != null) {
             this.animals.forEach(Animal::showDetails);
         } else {
             System.out.println("Aucun animal dans cet enclos");
         }
-        System.out.println("---");
     }
 }

@@ -116,9 +116,9 @@ public class Zoo {
      * Print animals details that the pen contains
      */
     public void printAnimalsFromPens() {
+        System.out.println("\nDescription du Zoo :");
         if(this.pens.size() > 0){
             this.pens.forEach(Pen::showDetails);
-            System.out.println("---");
         } else
             System.out.println("Le zoo ne comporte pas encore d'animaux.");
     }
