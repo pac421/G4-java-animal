@@ -1,12 +1,13 @@
 package employees;
 
+import UI.ConsoleColors;
 import animals.*;
 import pens.*;
 
 /**
  * Employee Class
  */
-public class Employee {
+public class Employee implements Runnable {
     /**
      * Enum Gender - Male or Female
      */
@@ -26,10 +27,13 @@ public class Employee {
      */
     private int age;
 
+    private int energyLevel;
+
     /**
      * Employee constructor without parameters
      */
     public Employee() {
+        this.energyLevel = 5;
     }
 
     /**
@@ -42,6 +46,7 @@ public class Employee {
         this.name = name;
         this.gender = gender;
         this.age = age;
+        this.energyLevel = 5;
     }
 
     /**
@@ -93,6 +98,31 @@ public class Employee {
     }
 
     /**
+     * Get employee energy level
+     * @return {@link Employee#energyLevel}
+     */
+    public int getEnergyLevel() {
+        return energyLevel;
+    }
+
+    /**
+     * Decrease {@link Employee#energyLevel}
+     */
+    public void decreaseEnergy() {
+        this.energyLevel--;
+        this.printEnergyLevel();
+    }
+
+    /**
+     * Decrease {@link Employee#energyLevel}
+     */
+    public void increaseEnergy() {
+        this.energyLevel++;
+        System.out.println("\n" + ConsoleColors.GREEN_BOLD_BRIGHT + "+1 énergie" + ConsoleColors.RESET);
+        this.printEnergyLevel();
+    }
+
+    /**
      * The employee looks at pen details
      * @param pen One existing pen
      */
@@ -131,5 +161,31 @@ public class Employee {
      */
     public void printDescription() {
         System.out.println("Vous incarnez "+this.name+(this.gender == Gender.M ? ", un homme" : ", une femme")+" de "+this.age+" ans.");
+        this.printEnergyLevel();
+    }
+
+    /**
+     * @return Employee energy level to string
+     */
+    public void printEnergyLevel() {
+        System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + "Niveau d'énergie: " + this.energyLevel + "/5." + ConsoleColors.RESET);
+    }
+
+    /**
+     * Launch actions every minute
+     */
+    @Override
+    public void run() {
+        while(true) {
+            try {
+                Thread.sleep(10000);
+
+                if(this.energyLevel < 5) {
+                    increaseEnergy();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

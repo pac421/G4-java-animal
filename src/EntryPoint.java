@@ -7,7 +7,6 @@ import zoos.Zoo;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * EntryPoint Class
@@ -26,8 +25,8 @@ public class EntryPoint implements Runnable {
      * @param args Arguments
      */
     public static void main(String[] args) {
-        System.out.println("\n\n" + ConsoleColors.YELLOW_BOLD_BRIGHT + "---------- Bienvenue sur ZooLogic ----------");
-        System.out.println("Vous êtes le gérant d'un Zoo. Faites en sorte que les animaux se portent bien et soient heureux !" + ConsoleColors.RESET + "\n");
+        System.out.println(ConsoleColors.YELLOW_BOLD_BRIGHT + "\n\n---------- Bienvenue sur ZooLogic ----------" + ConsoleColors.RESET);
+        System.out.println(ConsoleColors.YELLOW_BOLD_BRIGHT + "Vous êtes le gérant d'un Zoo. Faites en sorte que les animaux se portent bien et soient heureux !\n" + ConsoleColors.RESET);
 
         initEmployee();
         initZoo();
@@ -39,44 +38,42 @@ public class EntryPoint implements Runnable {
      * Initialize the employee of the zoo getting user datas
      */
     private static void initEmployee() {
-        employee = new Employee("Michelle", Employee.Gender.F, 23);
+        employee = new Employee();
 
-        /*
-        ArrayList<String> messages = new ArrayList<>();
-        messages.add("Bonjour et bienvenue au zoo ! Merci d'indiquer votre nom");
-        messages.add("Indiquez votre sexe : F ou M");
-        messages.add("Indiquez votre âge");
+        System.out.println("Veuillez indiquez votre nom:");
+        keyboard = new Scanner(System.in);
+        String choiceName = keyboard.nextLine();
+        if (choiceName != null && !choiceName.isEmpty()) {
+            employee.setName(choiceName);
+        }
 
-        Employee employee = new Employee();
-        int i = 0;
-        while (i < messages.size()) {
-            System.out.println(messages.get(i));
-            String response = keyboard.nextLine();
-            if (!response.isEmpty()) {
-                switch (i) {
-                    case 0: employee.setName(response);
-                        break;
-                    case 1:
-                        switch (response) {
-                            case "F" -> employee.setGender(Employee.Gender.F);
-                            default -> employee.setGender(Employee.Gender.M);
-                        }
-                        break;
-                    case 2:
-                        int age = 25;
-                        boolean isNumeric =  response.matches("[+-]?\\d*(\\.\\d+)?");
-                        if (isNumeric) {
-                            age = Integer.valueOf(response);
-                        }
-                        employee.setAge(age);
-                        break;
+        System.out.println("Veuillez indiquez votre sexe (F ou M):");
+        keyboard = new Scanner(System.in);
+        String choiceGender = keyboard.nextLine();
+        if (choiceGender != null && !choiceGender.isEmpty()) {
+            switch (choiceGender) {
+                case "F" -> {
+                    employee.setGender(Employee.Gender.F);
                 }
-                i++;
+                case "M" -> {
+                    employee.setGender(Employee.Gender.M);
+                }
             }
         }
-        */
 
+        System.out.println("Veuillez indiquez votre age:");
+        keyboard = new Scanner(System.in);
+        String choiceAge = keyboard.nextLine();
+        if (choiceAge != null && !choiceAge.isEmpty() && choiceAge.matches("[+-]?\\d*(\\.\\d+)?")) {
+            employee.setAge(Integer.parseInt(choiceAge));
+        }
+
+
+        //employee = new Employee("Michelle", Employee.Gender.F, 23);
         employee.printDescription();
+
+        Thread employeeThread = new Thread(employee);
+        employeeThread.start();
     }
 
     /**
@@ -100,15 +97,15 @@ public class EntryPoint implements Runnable {
         zoo.printAnimalsFromPens();
 
         EntryPoint entryPoint = new EntryPoint();
-        Thread thread = new Thread(entryPoint);
-        thread.start();
+        Thread entryPointThread = new Thread(entryPoint);
+        entryPointThread.start();
     }
 
     /**
      * "Zoo" Menu - Play interaction about zoo with the user
      */
     private static void playDefaultInteraction() {
-        System.out.println("\nQue souhaitez-vous faire ?\n1: Afficher l'état du Zoo\n2: Aller dans un enclos\n3: Démissionner du Zoo");
+        System.out.println("\n" + employee.getName() + ", que souhaitez-vous faire ?\n1: Afficher l'état du Zoo\n2: Aller dans un enclos\n3: Démissionner du Zoo");
 
         keyboard = new Scanner(System.in);
         String choice = keyboard.nextLine();
@@ -156,22 +153,31 @@ public class EntryPoint implements Runnable {
      */
     private static void playPenInteraction(Pen pen){
         System.out.println("\nQue souhaitez-vous faire dans l'enclos \""+pen.getName()+"\" ?\n1: Aller vers un animal\n2: Nettoyer l'enclos\n3: Afficher les détails\n4: Sortir de l'enclos");
+        System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + "Cette action nécéssite de l'énergie." + ConsoleColors.RESET);
+        employee.printEnergyLevel();
 
         keyboard = new Scanner(System.in);
         String choice = keyboard.nextLine();
-        if (choice != null && !choice.isEmpty()) {
-            switch (choice) {
-                case "1" -> playChooseAnimalInteraction(pen);
-                case "2" -> {
-                    pen.clean();
-                    playPenInteraction(pen);
+
+        if(employee.getEnergyLevel() > 0){
+            if (choice != null && !choice.isEmpty()) {
+                employee.decreaseEnergy();
+                switch (choice) {
+                    case "1" -> playChooseAnimalInteraction(pen);
+                    case "2" -> {
+                        pen.clean();
+                        playPenInteraction(pen);
+                    }
+                    case "3" -> {
+                        pen.showDetails();
+                        playPenInteraction(pen);
+                    }
+                    case "4" -> playDefaultInteraction();
                 }
-                case "3" -> {
-                    pen.showDetails();
-                    playPenInteraction(pen);
-                }
-                case "4" -> playDefaultInteraction();
             }
+        } else {
+            System.out.println(ConsoleColors.RED_BOLD_BRIGHT + "Vous n'avez plus assez d'énergie." + ConsoleColors.RESET);
+            playPenInteraction(pen);
         }
     }
 
@@ -180,7 +186,7 @@ public class EntryPoint implements Runnable {
      * @param pen Chosen pen
      */
     private static void playChooseAnimalInteraction(Pen pen){
-        System.out.println("\nDe quel animal souhaitez-vous vous occuper ?");
+        System.out.println("\nVers quel animal souhaitez-vous aller ?");
 
         HashMap<Integer, Animal> animalOptions = new HashMap<>();
 
@@ -206,29 +212,38 @@ public class EntryPoint implements Runnable {
      */
     private static void playActionInteraction(Animal animal, Pen pen){
         System.out.println("\nQue souhaitez-vous faire à \""+animal.getName()+"\" ?\n1: Nourrir\n2: Soigner\n3: "+(animal.isAsleep() ? "Réveiller" : "Endormir")+"\n4: Afficher les détails\n5: S'éloigner de l'animal");
+        System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + "Cette action nécéssite de l'énergie." + ConsoleColors.RESET);
+        employee.printEnergyLevel();
 
         keyboard = new Scanner(System.in);
         String choice = keyboard.nextLine();
-        if (choice != null && !choice.isEmpty()) {
-            switch (choice) {
-                case "1" -> {
-                    animal.feed();
-                    playActionInteraction(animal, pen);
+
+        if(employee.getEnergyLevel() > 0){
+            if (choice != null && !choice.isEmpty()) {
+                employee.decreaseEnergy();
+                switch (choice) {
+                    case "1" -> {
+                        animal.feed();
+                        playActionInteraction(animal, pen);
+                    }
+                    case "2" -> {
+                        animal.takeCare();
+                        playActionInteraction(animal, pen);
+                    }
+                    case "3" -> {
+                        animal.switchIsAsleep();
+                        playActionInteraction(animal, pen);
+                    }
+                    case "4" -> {
+                        animal.showDetails();
+                        playActionInteraction(animal, pen);
+                    }
+                    case "5" -> playPenInteraction(pen);
                 }
-                case "2" -> {
-                    animal.takeCare();
-                    playActionInteraction(animal, pen);
-                }
-                case "3" -> {
-                    animal.switchIsAsleep();
-                    playActionInteraction(animal, pen);
-                }
-                case "4" -> {
-                    animal.showDetails();
-                    playActionInteraction(animal, pen);
-                }
-                case "5" -> playPenInteraction(pen);
             }
+        } else {
+            System.out.println(ConsoleColors.RED_BOLD_BRIGHT + "Vous n'avez plus assez d'énergie." + ConsoleColors.RESET);
+            playActionInteraction(animal, pen);
         }
     }
 
@@ -239,7 +254,7 @@ public class EntryPoint implements Runnable {
     public void run() {
         while(true) {
             try {
-                Thread.sleep(30000);
+                Thread.sleep(40000);
 
                 System.out.println("\n" + ConsoleColors.RED_BACKGROUND + "Il y a du nouveau !" + ConsoleColors.RESET);
                 zoo.changeAnimalState();

@@ -110,19 +110,19 @@ public class Zoo {
      */
     public void printNumberOfAnimals() {
         int numberOfAnimal = this.pens.stream().mapToInt(Pen::getAnimalsNumber).sum();
-        System.out.println("Nombre total d'animaux dans le zoo : "+numberOfAnimal);
+        System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT + "Nombre total d'animaux dans le zoo : " + numberOfAnimal + ConsoleColors.RESET);
     }
 
     /**
      * Print animals details that the pen contains
      */
     public void printAnimalsFromPens() {
-        System.out.println("\n" + ConsoleColors.PURPLE + "Description du Zoo :");
+        System.out.println(ConsoleColors.PURPLE + "\nDescription du Zoo :" + ConsoleColors.RESET);
         if(this.pens.size() > 0){
             this.pens.forEach(Pen::showDetails);
+            this.printNumberOfAnimals();
         } else
-            System.out.println("Le zoo ne comporte pas encore d'animaux.");
-        System.out.println(ConsoleColors.RESET);
+            System.out.println(ConsoleColors.RED + "Le zoo ne comporte pas encore d'animaux." + ConsoleColors.RESET);
     }
 
     /**

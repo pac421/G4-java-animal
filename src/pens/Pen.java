@@ -203,7 +203,7 @@ public class Pen {
         if(this.animalsNumber > 0)
             this.animals.forEach(Animal::feed);
         else
-            System.out.println("La cage est vide.");
+            System.out.println(ConsoleColors.RED + "La cage est vide." + ConsoleColors.RESET);
     }
 
     /**
@@ -220,19 +220,19 @@ public class Pen {
      * Clean the pen - cleanliness to State Good
      */
     public void clean() {
-        System.out.println(ConsoleColors.GREEN + "État de propreté de l'enclos : "+this.cleanliness);
+        System.out.println("État de propreté de l'enclos : "+this.cleanliness);
         if(this.cleanliness == State.Bad){
             System.out.println("Nettoyage de l'enclos..");
             this.cleanliness = State.Good;
         }
-        System.out.println("L'enclos est propre !" + ConsoleColors.RESET);
+        System.out.println(ConsoleColors.GREEN + "L'enclos est propre !" + ConsoleColors.RESET);
     }
 
     /**
      * Print pen details
      */
     public void showDetails() {
-        System.out.println("---\n\"" + this.name+"\", enclos de "+this.area+"m2, nombre d'animaux: "+this.animalsNumber+"/"+this.maxAnimalsNumber+", État: "+this.cleanliness + ", animaux :");
+        System.out.println(ConsoleColors.PURPLE + "---\n\"" + this.name+"\", enclos de "+this.area+"m2, nombre d'animaux: "+this.animalsNumber+"/"+this.maxAnimalsNumber+", État: "+this.cleanliness + ", animaux :" + ConsoleColors.RESET);
         if (this.animals != null) {
             this.animals.forEach(Animal::showDetails);
         } else {

@@ -1,5 +1,6 @@
 package pens;
 
+import UI.ConsoleColors;
 import animals.Animal;
 import animals.movements.Flyer;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class Aviary extends Pen {
             System.out.println("Nettoyage du sol de la volière..");
             this.cleanliness = State.Good;
         }
-        System.out.println("La volière est propre !");
+        System.out.println(ConsoleColors.GREEN + "La volière est propre !" + ConsoleColors.RESET);
     }
 
     /**

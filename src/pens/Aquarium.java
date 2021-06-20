@@ -1,5 +1,6 @@
 package pens;
 
+import UI.ConsoleColors;
 import animals.Animal;
 import animals.movements.Swimmer;
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class Aquarium extends Pen {
             this.salinity = State.Good;
         }
 
-        System.out.println("Le bassin est propre !");
+        System.out.println(ConsoleColors.GREEN + "Le bassin est propre !" + ConsoleColors.RESET);
     }
 
     /**
