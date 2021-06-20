@@ -114,7 +114,7 @@ public class EntryPoint implements Runnable {
         if (choice != null && !choice.isEmpty()) {
             switch (choice) {
                 case "1" -> zoo.printAnimalsFromPens();
-                case "2" -> playPenInteraction();
+                case "2" -> playChoosePenInteraction();
                 case "3" -> {
                     System.out.println("Dommage..\nVotre fénéantise à causer la mort de tous les animaux..");
                     System.exit(0);
@@ -123,7 +123,7 @@ public class EntryPoint implements Runnable {
         }
     }
 
-    private static void playPenInteraction(){
+    private static void playChoosePenInteraction(){
         System.out.println("\nDans quel enlos souhaitez-vous vous rendre ?");
 
         HashMap<Integer, Pen> penOptions = new HashMap<>();
@@ -139,11 +139,25 @@ public class EntryPoint implements Runnable {
         keyboard = new Scanner(System.in);
         String choice = keyboard.nextLine();
         if (choice != null && !choice.isEmpty()) {
-            playAnimalInteraction(penOptions.get(Integer.parseInt(choice)));
+            playPenInteraction(penOptions.get(Integer.parseInt(choice)));
         }
     }
 
-    private static void playAnimalInteraction(Pen pen){
+    private static void playPenInteraction(Pen pen){
+        System.out.println("\nQue souhaitez-vous faire dans l'enclos "+pen.getName()+" ?\n1: Aller vers un animal\n2: Nettoyer l'enclos\n3: Afficher les détails");
+
+        keyboard = new Scanner(System.in);
+        String choice = keyboard.nextLine();
+        if (choice != null && !choice.isEmpty()) {
+            switch (choice) {
+                case "1" -> playChooseAnimalInteraction(pen);
+                case "2" -> pen.clean();
+                case "3" -> pen.showDetails();
+            }
+        }
+    }
+
+    private static void playChooseAnimalInteraction(Pen pen){
         System.out.println("\nDe quel animal souhaitez-vous vous occuper ?");
 
         HashMap<Integer, Animal> animalOptions = new HashMap<>();
@@ -164,7 +178,7 @@ public class EntryPoint implements Runnable {
     }
 
     private static void playActionInteraction(Animal animal){
-        System.out.println("\nQue souhaitez-vous faire à "+animal.getName()+" ?\n1: Nourrir\n2: Soigner\n3: "+(animal.isAsleep() ? "Réveiller" : "Endormir"));
+        System.out.println("\nQue souhaitez-vous faire à "+animal.getName()+" ?\n1: Nourrir\n2: Soigner\n3: "+(animal.isAsleep() ? "Réveiller" : "Endormir")+"\n4: Afficher les détails");
 
         keyboard = new Scanner(System.in);
         String choice = keyboard.nextLine();
@@ -173,6 +187,7 @@ public class EntryPoint implements Runnable {
                 case "1" -> animal.feed();
                 case "2" -> animal.takeCare();
                 case "3" -> animal.switchIsAsleep();
+                case "4" -> animal.showDetails();
             }
         }
     }
