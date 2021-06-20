@@ -33,6 +33,9 @@ Installation :
 # Clone the repository
 git clone https://github.com/pac421/G4-java-animal
 
+# Go to folder with executables
+cd G4-java-animal/out/artifacts/G4_java_animal_jar
+
 # Start the game
-xxx
+java -jar G4-java-animal.jar
 ```
