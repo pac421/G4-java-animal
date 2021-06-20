@@ -26,7 +26,7 @@ public class EntryPoint implements Runnable {
      */
     public static void main(String[] args) {
         System.out.println("\n\n---------- Bienvenue sur ZooLogic ----------");
-        System.out.println("Vous êtes le gérant d'un Zoo. Faite en sorte que les animaux se portent bien et soient heureux !\n");
+        System.out.println("Vous êtes le gérant d'un Zoo. Faites en sorte que les animaux se portent bien et soient heureux !\n");
 
         initEmployee();
         initZoo();
@@ -104,7 +104,7 @@ public class EntryPoint implements Runnable {
     }
 
     /**
-     * Play another interaction with the users
+     * "Zoo" Menu - Play interaction about zoo with the user
      */
     private static void playDefaultInteraction() {
         System.out.println("\nQue souhaitez-vous faire ?\n1: Afficher l'état du Zoo\n2: Aller dans un enclos\n3: Démissionner du Zoo");
@@ -116,15 +116,18 @@ public class EntryPoint implements Runnable {
                 case "1" -> zoo.printAnimalsFromPens();
                 case "2" -> playChoosePenInteraction();
                 case "3" -> {
-                    System.out.println("Dommage..\nVotre fénéantise à causer la mort de tous les animaux..");
+                    System.out.println("Dommage..\nVotre fénéantise a causé la mort de tous les animaux..");
                     System.exit(0);
                 }
             }
         }
     }
 
+    /**
+     * "Choix Enclos" Menu - Play interaction about choosing pen with the user
+     */
     private static void playChoosePenInteraction(){
-        System.out.println("\nDans quel enlos souhaitez-vous vous rendre ?");
+        System.out.println("\nDans quel enclos souhaitez-vous vous rendre ?");
 
         HashMap<Integer, Pen> penOptions = new HashMap<>();
 
@@ -143,6 +146,10 @@ public class EntryPoint implements Runnable {
         }
     }
 
+    /**
+     * "Enclos" Menu - Play interaction about chosen pen with the user
+     * @param pen Chosen pen
+     */
     private static void playPenInteraction(Pen pen){
         System.out.println("\nQue souhaitez-vous faire dans l'enclos \""+pen.getName()+"\" ?\n1: Aller vers un animal\n2: Nettoyer l'enclos\n3: Afficher les détails\n4: Sortir de l'enclos");
 
@@ -158,6 +165,10 @@ public class EntryPoint implements Runnable {
         }
     }
 
+    /**
+     * "Choix Animal" Menu - Play interaction about chosing an animal from pen with the user
+     * @param pen Chosen pen
+     */
     private static void playChooseAnimalInteraction(Pen pen){
         System.out.println("\nDe quel animal souhaitez-vous vous occuper ?");
 
@@ -178,8 +189,13 @@ public class EntryPoint implements Runnable {
         }
     }
 
+    /**
+     * "Animal" Menu - Play interaction about chosen animal with the user
+     * @param animal Chosen animal
+     * @param pen Chosen pen
+     */
     private static void playActionInteraction(Animal animal, Pen pen){
-        System.out.println("\nQue souhaitez-vous faire à "+animal.getName()+" ?\n1: Nourrir\n2: Soigner\n3: "+(animal.isAsleep() ? "Réveiller" : "Endormir")+"\n4: Afficher les détails\n5: S'éloigner de l'animal");
+        System.out.println("\nQue souhaitez-vous faire à \""+animal.getName()+"\" ?\n1: Nourrir\n2: Soigner\n3: "+(animal.isAsleep() ? "Réveiller" : "Endormir")+"\n4: Afficher les détails\n5: S'éloigner de l'animal");
 
         keyboard = new Scanner(System.in);
         String choice = keyboard.nextLine();
@@ -194,6 +210,9 @@ public class EntryPoint implements Runnable {
         }
     }
 
+    /**
+     * Launch actions every minute
+     */
     @Override
     public void run() {
         while(true) {

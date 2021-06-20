@@ -136,11 +136,11 @@ public class Zoo {
                 switch (action) {
                     case 0 -> {
                         animal.setHealth((int) (Math.random() * 100));
-                        System.out.println("La santé de " + animal.getName() + " est passé à " + animal.getHealth() + "/100.");
+                        System.out.println("La santé de \"" + animal.getName() + "\" est passé à " + animal.getHealth() + "/100.");
                     }
                     case 1 -> {
                         animal.setHunger((int) (Math.random() * 100));
-                        System.out.println("La faim de " + animal.getName() + " est passé à " + animal.getHunger() + "/100.");
+                        System.out.println("La faim de \"" + animal.getName() + "\" est passée à " + animal.getHunger() + "/100.");
                     }
                     case 2 -> {
                         animal.switchIsAsleep();
